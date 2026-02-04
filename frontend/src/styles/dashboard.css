@@ -1,0 +1,19 @@
+.dashboard header {
+  margin-bottom: 1.5rem;
+}
+
+.dashboard .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.dashboard .card {
+  text-align: center;
+}
+
+.dashboard .card strong {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
