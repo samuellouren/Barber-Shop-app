@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  RECEPCAO
+}
+
+enum AppointmentStatus {
+  AGENDADO
+  CONCLUIDO
+  CANCELADO
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(RECEPCAO)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id            String        @id @default(uuid())
+  name          String
+  phone         String
+  email         String?       @unique
+  birthDate     DateTime
+  preferences   String?
+  loyaltyPoints Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  appointments  Appointment[]
+  discounts     DiscountCode[]
+}
+
+model Barber {
+  id           String        @id @default(uuid())
+  name         String
+  phone        String
+  email        String?       @unique
+  specialties  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+}
+
+model Service {
+  id           String        @id @default(uuid())
+  name         String
+  price        Decimal       @db.Decimal(10, 2)
+  duration     Int
+  description  String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+}
+
+model Appointment {
+  id          String             @id @default(uuid())
+  date        DateTime
+  status      AppointmentStatus  @default(AGENDADO)
+  notes       String?
+  clientId    String
+  barberId    String
+  serviceId   String
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  client      Client             @relation(fields: [clientId], references: [id])
+  barber      Barber             @relation(fields: [barberId], references: [id])
+  service     Service            @relation(fields: [serviceId], references: [id])
+  discountUse DiscountUsage?
+}
+
+model DiscountCode {
+  id        String       @id @default(uuid())
+  code      String       @unique
+  percent   Int          @default(10)
+  clientId  String
+  createdAt DateTime     @default(now())
+  expiresAt DateTime
+  usedAt    DateTime?
+  client    Client       @relation(fields: [clientId], references: [id])
+  usages    DiscountUsage[]
+}
+
+model DiscountUsage {
+  id            String       @id @default(uuid())
+  appointmentId String       @unique
+  discountId    String
+  usedAt        DateTime     @default(now())
+  appointment   Appointment  @relation(fields: [appointmentId], references: [id])
+  discount      DiscountCode @relation(fields: [discountId], references: [id])
+}
