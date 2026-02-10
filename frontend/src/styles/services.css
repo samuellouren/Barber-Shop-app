@@ -1,35 +1,87 @@
+/* ===========================
+   SERVICES PAGE – MODO ESCURO
+   =========================== */
+.services-page {
+  color: #F9FAFB;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #1F2937; /* fundo escuro geral */
+}
+
+/* HEADER */
 .services-page header {
   margin-bottom: 1.5rem;
 }
 
+.services-page header h2 {
+  font-size: 2rem;
+  color: #F9FAFB;
+}
+
+.services-page header p {
+  color: #CBD5E1;
+  margin-top: 0.3rem;
+}
+
+/* GRID PRINCIPAL */
 .services-grid {
   display: grid;
   grid-template-columns: minmax(280px, 1fr) 2fr;
   gap: 1.5rem;
 }
 
+/* FORMULÁRIO E CARD */
 .services-grid form,
 .services-grid .card {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  background: #2D3748; /* card escuro */
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.services-grid form:hover,
+.services-grid .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255,255,255,0.1);
+}
+
+/* INPUTS E TEXTAREA */
 .services-grid input,
 .services-grid textarea {
   padding: 0.6rem 0.8rem;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #4B5563;
+  background: #374151;
+  color: #F9FAFB;
 }
 
+.services-grid input::placeholder,
+.services-grid textarea::placeholder {
+  color: #CBD5E1;
+}
+
+/* BOTÃO */
 .services-grid button {
   background: #4f46e5;
-  color: #fff;
+  color: #F9FAFB;
   border: none;
   padding: 0.6rem;
   border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
+.services-grid button:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* LISTA DE SERVIÇOS */
 .service-list {
   list-style: none;
   display: flex;
@@ -41,10 +93,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f1f5f9;
-  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #4B5563;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
 }
 
+.service-list li:hover {
+  background: #374151;
+  transform: translateY(-1px);
+}
+
+/* RESPONSIVO */
 @media (max-width: 960px) {
   .services-grid {
     grid-template-columns: 1fr;

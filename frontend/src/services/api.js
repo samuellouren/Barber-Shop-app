@@ -11,7 +11,13 @@ export const apiRequest = async (path, options = {}) => {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
-    throw new Error(error.error || "Erro inesperado");
+    const message =
+      error.message || error.error || response.statusText || "Erro inesperado";
+    throw new Error(message);
+  }
+
+  if (response.status === 204) {
+    return null;
   }
 
   return response.json();

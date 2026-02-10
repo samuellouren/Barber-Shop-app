@@ -6,6 +6,7 @@ import ClientsPage from "./pages/ClientsPage";
 import AppointmentsPage from "./pages/AppointmentsPage";
 import BarbersPage from "./pages/BarbersPage";
 import ServicesPage from "./pages/ServicesPage";
+import DiscountsPage from "./pages/DiscountsPage";
 import Layout from "./components/Layout";
 import { AuthProvider, useAuth } from "./services/authContext";
 
@@ -31,6 +32,7 @@ const App = () => (
         <Route path="/agendamentos" element={<AppointmentsPage />} />
         <Route path="/barbeiros" element={<BarbersPage />} />
         <Route path="/servicos" element={<ServicesPage />} />
+        <Route path="/descontos" element={<DiscountsPage />} />
       </Route>
     </Routes>
   </AuthProvider>

@@ -1,52 +1,283 @@
-.barbers-page header {
-  margin-bottom: 1.5rem;
+/* ===========================
+   BARBERS PAGE – Padrão de mercado, alinhado
+   =========================== */
+.barbers-page {
+  color: #F9FAFB;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #1F2937;
 }
 
+.barbers-page header {
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.barbers-page header h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #F9FAFB;
+  letter-spacing: -0.02em;
+}
+
+.barbers-page header p {
+  color: #9CA3AF;
+  margin-top: 0.25rem;
+  font-size: 0.9375rem;
+}
+
+/* Grid principal */
 .barbers-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) 2fr;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.6fr);
   gap: 1.5rem;
+  align-items: start;
 }
 
+/* Cards */
 .barbers-grid form,
 .barbers-grid .card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.barbers-grid input,
-.barbers-grid textarea {
-  padding: 0.6rem 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-}
-
-.barbers-grid button {
   background: #111827;
-  color: #fff;
-  border: none;
-  padding: 0.6rem;
-  border-radius: 8px;
-}
-
-.barber-list {
-  list-style: none;
+  border: 1px solid #374151;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.barber-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #f1f5f9;
-  padding-bottom: 0.8rem;
+.barbers-grid .card-list {
+  padding: 1.25rem;
 }
 
-@media (max-width: 960px) {
+.barbers-grid form h3,
+.barbers-grid .card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #F3F4F6;
+  margin: 0 0 0.25rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #374151;
+}
+
+/* Labels e inputs */
+.barbers-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #9CA3AF;
+}
+
+.barbers-grid input,
+.barbers-grid textarea {
+  padding: 0.625rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #4B5563;
+  font-size: 0.9375rem;
+  background: #1F2937;
+  color: #F9FAFB;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.barbers-grid input:focus,
+.barbers-grid textarea:focus {
+  outline: none;
+  border-color: #6366F1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.barbers-grid textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* Botões do formulário */
+.barbers-grid .form-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.barbers-grid .btn-primary {
+  background: #6366F1;
+  color: #FFF;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.barbers-grid .btn-primary:hover:not(:disabled) {
+  background: #4F46E5;
+}
+
+.barbers-grid .btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.barbers-grid .btn-secondary {
+  background: transparent;
+  color: #9CA3AF;
+  border: 1px solid #4B5563;
+  padding: 0.625rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.barbers-grid .btn-secondary:hover {
+  border-color: #6B7280;
+  color: #D1D5DB;
+}
+
+/* Lista de barbeiros – linha alinhada */
+.barber-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.barber-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  background: #1F2937;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.barber-item:hover {
+  background: #374151;
+  border-color: #4B5563;
+}
+
+.barber-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.barber-name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #F9FAFB;
+}
+
+.barber-phone,
+.barber-email {
+  font-size: 0.8125rem;
+  color: #9CA3AF;
+}
+
+.barber-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barber-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+/* Tag de especialidades */
+.barber-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.barber-tag.no-specialty {
+  background: #374151;
+  color: #9CA3AF;
+}
+
+.barber-tag.has-specialty {
+  background: rgba(99, 102, 241, 0.2);
+  color: #A5B4FC;
+}
+
+/* Ações: Editar e Excluir */
+.barber-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.barber-actions .btn-editar {
+  background: #6366F1;
+  color: #FFF;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.barber-actions .btn-editar:hover {
+  background: #4F46E5;
+}
+
+.barber-actions .btn-excluir {
+  background: transparent;
+  color: #F87171;
+  border: 1px solid #F87171;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.barber-actions .btn-excluir:hover {
+  background: rgba(248, 113, 113, 0.15);
+}
+
+.loading-text,
+.empty-text {
+  font-size: 0.9375rem;
+  color: #9CA3AF;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
   .barbers-grid {
     grid-template-columns: 1fr;
+  }
+
+  .barber-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .barber-right {
+    width: 100%;
+    justify-content: space-between;
   }
 }

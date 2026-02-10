@@ -1,19 +1,144 @@
-.dashboard header {
-  margin-bottom: 1.5rem;
+.dashboard {
+  min-height: 100vh;
+  padding: 2rem;
+  color: #F9FAFB;
 }
 
+/* HEADER */
+.dashboard header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.dashboard header h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.dashboard header p {
+  color: #CBD5E1;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* CARDS PRINCIPAIS */
 .dashboard .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .dashboard .card {
   text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.dashboard .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255,255,255,0.1);
+}
+
+/* NÚMEROS E TEXTOS DOS CARDS */
 .dashboard .card strong {
   font-size: 2rem;
+  color: #F9FAFB;
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.dashboard .card span {
+  color: #CBD5E1;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+/* CORES PERSONALIZADAS POR TIPO DE CARD */
+.dashboard .total-clients { background-color: #256D85; }
+.dashboard .total-barbers { background-color: #3E7D3A; }
+.dashboard .total-appointments { background-color: #D6A74F; }
+.dashboard .today-appointments { background-color: #D57A91; }
+
+/* ÚLTIMOS AGENDAMENTOS */
+.dashboard .recent-appointments {
+  padding: 1.5rem;
+  border-radius: 14px;
+}
+
+.dashboard .recent-appointments h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.dashboard .recent-appointments ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.dashboard .recent-appointments li {
+  background: #374151;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dashboard .recent-appointments li:hover {
+  background: #4B5563;
+  transform: translateY(-2px);
+}
+
+.dashboard .recent-appointments li div {
+  font-size: 0.95rem;
+  color: #F9FAFB;
+}
+
+.dashboard .recent-appointments .appt-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+
+.dashboard .recent-appointments .status-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.dashboard .recent-appointments .status-agendado {
+  background: rgba(214, 167, 79, 0.35);
+  color: #EAB308;
+}
+
+.dashboard .recent-appointments .status-concluido {
+  background: rgba(62, 125, 58, 0.35);
+  color: #86EFAC;
+}
+
+.dashboard .recent-appointments .status-cancelado {
+  background: rgba(185, 28, 28, 0.35);
+  color: #FCA5A5;
+}
+
+/* RESPONSIVO */
+@media (max-width: 960px) {
+  .dashboard .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard {
+    padding: 1.5rem;
+  }
 }

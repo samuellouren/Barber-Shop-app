@@ -1,39 +1,105 @@
-.clients-page header {
-  margin-bottom: 1.5rem;
+/* ===========================
+   CLIENTS PAGE – MODO ESCURO
+   =========================== */
+.clients-page {
+  color: #F9FAFB;
+  min-height: 100vh;
+  padding: 2rem;
+  background: #1F2937; /* fundo escuro geral */
 }
 
+/* HEADER */
+.clients-page header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.clients-page header h2 {
+  font-size: 2rem;
+  color: #F9FAFB;
+}
+
+.clients-page header p {
+  color: #CBD5E1;
+  margin-top: 0.3rem;
+}
+
+/* GRID PRINCIPAL */
 .clients-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) 2fr;
-  gap: 1.5rem;
+  grid-template-columns: minmax(300px, 1fr) 2fr;
+  gap: 2rem;
 }
 
+/* FORMULÁRIO E CARD */
 .clients-grid form,
 .clients-grid .card {
+  background: #2D3748; /* card escuro */
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.clients-grid form:hover,
+.clients-grid .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255,255,255,0.1);
+}
+
+/* INPUTS, TEXTAREA E SELECT */
 .clients-grid input,
-.clients-grid textarea {
-  padding: 0.6rem 0.8rem;
+.clients-grid textarea,
+.clients-grid select {
+  padding: 0.7rem 1rem;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #4B5563;
+  font-size: 0.95rem;
+  background: #374151;
+  color: #F9FAFB;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+.clients-grid input:focus,
+.clients-grid textarea:focus,
+.clients-grid select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.2);
+}
+
+/* BOTÃO */
 .clients-grid button {
-  background: #111827;
-  color: #fff;
+  background: #4f46e5;
+  color: #F9FAFB;
   border: none;
-  padding: 0.6rem;
+  padding: 0.8rem;
   border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
 }
 
+.clients-grid button:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+}
+
+/* CAMPO DE BUSCA */
 .search input {
   width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #4B5563;
+  background: #374151;
+  color: #F9FAFB;
+  margin-bottom: 0.8rem;
 }
 
+/* LISTA DE CLIENTES */
 .client-list {
   list-style: none;
   display: flex;
@@ -45,10 +111,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #f1f5f9;
-  padding-bottom: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #4B5563;
+  transition: background 0.2s, transform 0.2s;
+  border-radius: 8px;
 }
 
+.client-list li:hover {
+  background: #374151;
+  transform: translateY(-1px);
+}
+
+/* TAG DE PONTOS */
+.client-list .tag {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #CBD5E1;
+  background: #4B5563;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+/* RESPONSIVO */
 @media (max-width: 960px) {
   .clients-grid {
     grid-template-columns: 1fr;

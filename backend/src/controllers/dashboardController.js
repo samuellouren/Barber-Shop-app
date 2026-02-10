@@ -1,39 +1,40 @@
+// src/controllers/dashboardController.js
 const prisma = require("../services/prismaClient");
 
+// ==============================
+// DASHBOARD
+// ==============================
 const getDashboard = async (req, res) => {
-  const start = new Date();
-  start.setHours(0, 0, 0, 0);
-  const end = new Date(start);
-  end.setHours(23, 59, 59, 999);
-
-  const [totalClients, todayAppointments, monthlyBirthdays, discountsUsed] =
-    await Promise.all([
+  try {
+    // Contagem geral de clientes, barbeiros e agendamentos
+    const [totalClients, totalBarbers, totalAppointments] = await Promise.all([
       prisma.client.count(),
-      prisma.appointment.count({
-        where: {
-          date: {
-            gte: start,
-            lte: end
-          }
-        }
-      }),
-      prisma.client.count({
-        where: {
-          birthDate: {
-            gte: new Date(start.getFullYear(), start.getMonth(), 1),
-            lte: new Date(start.getFullYear(), start.getMonth() + 1, 0)
-          }
-        }
-      }),
-      prisma.discountUsage.count()
+      prisma.barber.count(),
+      prisma.appointment.count(),
     ]);
 
-  return res.json({
-    totalClients,
-    todayAppointments,
-    monthlyBirthdays,
-    discountsUsed
-  });
+    // Últimos 5 agendamentos (mais recentes)
+    const recentAppointments = await prisma.appointment.findMany({
+      orderBy: { date: "desc" },
+      take: 5,
+      include: {
+        client: true,
+        service: true,
+        barber: true,
+      },
+    });
+
+    // Retorno estruturado
+    res.json({
+      totalClients,
+      totalBarbers,
+      totalAppointments,
+      recentAppointments,
+    });
+  } catch (error) {
+    console.error("Erro ao carregar dashboard:", error);
+    res.status(500).json({ error: "Erro ao carregar dashboard." });
+  }
 };
 
 module.exports = { getDashboard };

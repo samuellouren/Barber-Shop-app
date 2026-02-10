@@ -6,8 +6,8 @@
 }
 
 body {
-  background: #f5f6fa;
-  color: #1b1f23;
+  background: #1F2937; /* fundo escuro confortável */
+  color: #F9FAFB;       /* texto claro */
 }
 
 a {
@@ -24,23 +24,37 @@ textarea,
 select,
 button {
   font-size: 0.95rem;
+  background: #2D3748; /* inputs escuros */
+  color: #F9FAFB;
+  border: 1px solid #4B5563;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
 }
 
 .card {
-  background: #fff;
+  background: #2D3748; /* cards escuros */
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
 }
 
 .error {
-  color: #c0392b;
+  color: #f87171; /* vermelho suave para dark mode */
   font-weight: 600;
 }
 
+.success {
+  color: #86efac;
+  font-weight: 500;
+}
+
+.muted {
+  color: #9ca3af;
+}
+
 .tag {
-  background: #f0f0ff;
-  color: #4f46e5;
+  background: #4f46e5; /* roxo escuro */
+  color: #F9FAFB;
   border-radius: 999px;
   padding: 0.3rem 0.8rem;
   font-size: 0.75rem;

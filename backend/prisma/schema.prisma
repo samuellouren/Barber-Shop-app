@@ -1,3 +1,4 @@
+// Prisma 5 – JSON protocol é o padrão; sem preview flags necessárias
 generator client {
   provider = "prisma-client-js"
 }
@@ -26,20 +27,26 @@ model User {
   role      UserRole @default(RECEPCAO)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([email])
 }
 
 model Client {
-  id            String        @id @default(uuid())
+  id            String         @id @default(uuid())
   name          String
   phone         String
-  email         String?       @unique
+  email         String?        @unique
   birthDate     DateTime
   preferences   String?
-  loyaltyPoints Int           @default(0)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  loyaltyPoints Int            @default(0)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
   appointments  Appointment[]
   discounts     DiscountCode[]
+
+  @@index([name])
+  @@index([phone])
 }
 
 model Barber {
@@ -50,7 +57,10 @@ model Barber {
   specialties  String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+
   appointments Appointment[]
+
+  @@index([name])
 }
 
 model Service {
@@ -61,35 +71,47 @@ model Service {
   description  String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+
   appointments Appointment[]
+
+  @@index([name])
 }
 
 model Appointment {
-  id          String             @id @default(uuid())
+  id          String            @id @default(uuid())
   date        DateTime
-  status      AppointmentStatus  @default(AGENDADO)
+  status      AppointmentStatus @default(AGENDADO)
   notes       String?
+
   clientId    String
   barberId    String
   serviceId   String
-  createdAt   DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
-  client      Client             @relation(fields: [clientId], references: [id])
-  barber      Barber             @relation(fields: [barberId], references: [id])
-  service     Service            @relation(fields: [serviceId], references: [id])
+
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  client      Client            @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  barber      Barber            @relation(fields: [barberId], references: [id], onDelete: Cascade)
+  service     Service           @relation(fields: [serviceId], references: [id])
   discountUse DiscountUsage?
+
+  @@index([date])
+  @@index([status])
 }
 
 model DiscountCode {
-  id        String       @id @default(uuid())
-  code      String       @unique
-  percent   Int          @default(10)
+  id        String          @id @default(uuid())
+  code      String          @unique
+  percent   Int             @default(10)
   clientId  String
-  createdAt DateTime     @default(now())
+  createdAt DateTime        @default(now())
   expiresAt DateTime
   usedAt    DateTime?
-  client    Client       @relation(fields: [clientId], references: [id])
+
+  client    Client          @relation(fields: [clientId], references: [id], onDelete: Cascade)
   usages    DiscountUsage[]
+
+  @@index([code])
 }
 
 model DiscountUsage {
@@ -97,6 +119,15 @@ model DiscountUsage {
   appointmentId String       @unique
   discountId    String
   usedAt        DateTime     @default(now())
-  appointment   Appointment  @relation(fields: [appointmentId], references: [id])
-  discount      DiscountCode @relation(fields: [discountId], references: [id])
+
+  appointment   Appointment  @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  discount      DiscountCode @relation(fields: [discountId], references: [id], onDelete: Cascade)
+}
+
+model Setting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+
+  @@index([key])
 }

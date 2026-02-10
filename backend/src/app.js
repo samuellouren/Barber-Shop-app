@@ -8,6 +8,7 @@ const serviceRoutes = require("./routes/serviceRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const discountRoutes = require("./routes/discountRoutes");
+const settingsRoutes = require("./routes/settingsRoutes");
 
 const app = express();
 
@@ -26,5 +27,6 @@ app.use("/services", serviceRoutes);
 app.use("/appointments", appointmentRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/discounts", discountRoutes);
+app.use("/settings", settingsRoutes);
 
 module.exports = app;

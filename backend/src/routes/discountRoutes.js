@@ -1,12 +1,12 @@
 const express = require("express");
 const authMiddleware = require("../middlewares/authMiddleware");
-const { checkBirthdays, validateCode } = require("../controllers/discountController");
+const { validateCode, sendBirthday } = require("../controllers/discountController");
 
 const router = express.Router();
 
 router.use(authMiddleware);
 
-router.post("/birthdays", checkBirthdays);
 router.get("/validate", validateCode);
+router.post("/send-birthday", sendBirthday);
 
 module.exports = router;
